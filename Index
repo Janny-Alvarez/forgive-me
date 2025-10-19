@@ -1,1 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>¿Me perdonas?</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
+    body {
+      background: linear-gradient(135deg, #ffe6f0, #e0f7fa);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .card {
+      background-color: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      max-width: 500px;
+      animation: fadeIn 1s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .heart {
+      font-size: 60px;
+      color: #ff6b9d;
+      margin-bottom: 20px;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    h1 {
+      font-size: 28px;
+      color: #ff4081;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 18px;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .promise {
+      font-style: italic;
+      color: #e91e63;
+      font-weight: 600;
+    }
+
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 12px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-perdon {
+      background-color: #ff4081;
+      color: white;
+    }
+
+    .btn-perdon:hover {
+      background-color: #e91e63;
+      transform: scale(1.05);
+    }
+
+    .btn-no {
+      background-color: #bdbdbd;
+      color: white;
+    }
+
+    .btn-no:hover {
+      background-color: #9e9e9e;
+      transform: scale(1.05);
+    }
+
+    .btn-no.moving {
+      position: fixed;
+      z-index: 1000;
+    }
+
+    /* Estilos para el mensaje de gracias (oculto al inicio) */
+    #gracias {
+      display: none;
+      max-width: 600px;
+      padding: 30px;
+      font-size: 28px;
+      line-height: 1.6;
+      color: #d81b60;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    #gracias .abrazo {
+      font-size: 80px;
+      margin: 20px 0;
+      animation: bounce 1s infinite alternate;
+    }
+
+    @keyframes bounce {
+      from { transform: translateY(0); }
+      to { transform: translateY(-15px); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Tarjeta inicial -->
+  <div class="card" id="pregunta">
+    <div class="heart">❤️</div>
+    <h1>¿Me perdonas?</h1>
+    <p>Sé que me equivoqué pero te prometo que <span class="promise">no volverá a pasar</span>, Emily yo te aprecio mucho, fui debil y me deje creer esos comentarios, pero no volvera pasar enserio disculpame.</p>  
+    <p>Te valoro más de lo que imaginas, y haré todo lo posible para que sepas, que tengo confianza en ti porque yo creo en ti.</p>
+    <div class="btn-container">
+      <button class="btn btn-perdon" onclick="mostrarGracias()">Sí, te perdono 💖</button>
+      <button class="btn btn-no" id="noBtn">No 😤</button>
+    </div>
+  </div>
+
+  <!-- Mensaje de gracias (inicialmente oculto) -->
+  <div id="gracias">
+    ¡Gracias, corazón! 🤗<br>
+    <div class="abrazo">🤗💖</div>
+    <span>Te quiero muchísimo…<br>¡Tú eres mi Stay!</span>
+  </div>
+
+  <script>
+    function mostrarGracias() {
+      // Ocultamos la pregunta
+      document.getElementById('pregunta').style.display = 'none';
+      // Mostramos el mensaje de gracias
+      document.getElementById('gracias').style.display = 'block';
+    }
+
+    const noBtn = document.getElementById('noBtn');
+    noBtn.addEventListener('mouseover', () => {
+      const x = Math.random() * (window.innerWidth - 150);
+      const y = Math.random() * (window.innerHeight - 60);
+      noBtn.classList.add('moving');
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    });
+
+    noBtn.addEventListener('click', () => {
+      alert('¡Por favor! Solo hay una respuesta correcta... 😅');
+    });
+  </script>
+</body>
+</html>
